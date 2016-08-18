@@ -1,3 +1,5 @@
+package p101;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -5,6 +7,7 @@ import java.util.StringTokenizer;
 
 /**
  * Created by Mason on 2016-08-16.
+ * TODO MOHS needs efficiency
  */
 public class Main
 {
