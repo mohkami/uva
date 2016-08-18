@@ -1,0 +1,1 @@
+# Basic template for problem solving on UVa online judge system
