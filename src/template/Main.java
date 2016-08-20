@@ -50,12 +50,16 @@ public class Main
             return (new String(lin, 0, lg));
         }
 
-        static int getOnlyDigitFromLine()
+        static int[] getNDigitFromLine(int n)
         {
-            String nLine = Utils.ReadLn();
-            StringTokenizer tokenizer = new StringTokenizer(nLine);
-            return Integer.parseInt(tokenizer.nextToken());
+            int[] values = new int[n];
+            String line = Utils.ReadLn();
+            StringTokenizer tokenizer = new StringTokenizer(line);
+            for (int i = 0; i < n; i++)
+            {
+                values[i] = Integer.parseInt(tokenizer.nextToken());
+            }
+            return values;
         }
-
     }
 }
