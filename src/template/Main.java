@@ -11,6 +11,10 @@ public class Main
 {
     private Utils utils;
 
+    private void run()
+    {
+    }
+
     private Main(String inputFile)
     {
         utils = new Utils(inputFile);
@@ -25,10 +29,6 @@ public class Main
         }
         Main m = new Main(inputFile);
         m.run();
-    }
-
-    private void run()
-    {
     }
 
     private class Utils
@@ -68,6 +68,21 @@ public class Main
                 values[i] = scanner.nextInt();
             }
             return values;
+        }
+
+        String readLine()
+        {
+            String line = null;
+            if (scanner.hasNext())
+            {
+                line = scanner.nextLine();
+            }
+            return line;
+        }
+
+        void printLine(String line)
+        {
+            System.out.println(line);
         }
     }
 }

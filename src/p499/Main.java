@@ -1,3 +1,5 @@
+package p499;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,6 +16,52 @@ public class Main
 
     private void run()
     {
+        String line;
+        while ((line = utils.readLine()) != null)
+        {
+            int[] letterCount = new int[125];
+            int max = 0;
+            for (int i = 0; i < line.length(); i++)
+            {
+                char letter = line.charAt(i);
+                if (Character.isAlphabetic(letter))
+                {
+                    letterCount[(int) letter]++;
+                    if (letterCount[(int) letter] > max)
+                    {
+                        max = letterCount[(int) letter];
+                    }
+                }
+            }
+            String mostFrequentLetters = getSortedAlphabetList(letterCount, max);
+            utils.printLine(mostFrequentLetters + " " + max);
+        }
+    }
+
+    private String getSortedAlphabetList(int[] countArray, int max)
+    {
+        List<Character> resArrayList = new ArrayList<>();
+        for (int i = (int) 'A'; i < (int) 'Z'; i++)
+        {
+            if (countArray[i] == max)
+            {
+                resArrayList.add((char) i);
+            }
+        }
+        for (int i = (int) 'a'; i < (int) 'z'; i++)
+        {
+            if (countArray[i] == max)
+            {
+                resArrayList.add((char) i);
+            }
+        }
+        Collections.sort(resArrayList);
+        String res = "";
+        for (char letter : resArrayList)
+        {
+            res += letter;
+        }
+        return res;
     }
 
     private Main(String inputFile)
