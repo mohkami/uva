@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Mason on 2016-08-16.
@@ -36,11 +33,11 @@ public class Main
     {
         Scanner scanner;
 
-        Utils(String inputFIle)
+        Utils(String inputFile)
         {
-            if (!inputFIle.isEmpty())
+            if (!inputFile.isEmpty())
             {
-                File file = new File(getCurrentDirectory() + inputFIle);
+                File file = new File(getCurrentDirectory() + inputFile);
 
                 try
                 {
@@ -61,12 +58,17 @@ public class Main
             return System.getProperty("user.dir") + "\\src\\";
         }
 
+        int readOneIntLine(){
+            return getNDigitFromLine(1)[0];
+        }
+
         int[] getNDigitFromLine(int n)
         {
             int[] values = new int[n];
+            String[] words = utils.readLine().split("\\s+");
             for (int i = 0; i < n; i++)
             {
-                values[i] = scanner.nextInt();
+                values[i] = Integer.valueOf(words[i]);
             }
             return values;
         }

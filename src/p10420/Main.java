@@ -1,8 +1,8 @@
-package template;
+package p10420;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Mason on 2016-08-16.
@@ -11,8 +11,26 @@ public class Main
 {
     private Utils utils;
 
+    Map<String, Integer> countryCounterMap = new HashMap<>();
+
     private void run()
     {
+        int linesNumber = utils.readOneIntLine();
+        for (int i = 0; i < linesNumber; i++)
+        {
+            String line = utils.readLine().trim();
+            String[] words = line.split("\\s+");
+            String countryName = words[0];
+
+            countryCounterMap.put(countryName, countryCounterMap.containsKey(countryName) ? countryCounterMap.get(countryName) + 1 : 1);
+        }
+        List<String> sortedCountries = new ArrayList<>(countryCounterMap.keySet());
+        Collections.sort(sortedCountries);
+
+        for (String country : sortedCountries)
+        {
+            utils.printLine(country + " " + countryCounterMap.get(country));
+        }
     }
 
     private Main(String inputFile)
