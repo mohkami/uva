@@ -1,4 +1,4 @@
-package template;
+package p10550;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,10 +11,31 @@ public class Main
 {
     private Utils inUtils;
 
+    private final static int NUMBERS_COUNTS = 40;
+    private final static int UNIT_DEGREE = 360 / NUMBERS_COUNTS;
+
     private void run(boolean runningLocally)
     {
 
-        String resLines = "";
+        String lines1 = "";
+        int[] lineValues = inUtils.getNextNDigitFromLine(4);
+        while (!lastLine(lineValues))
+        {
+            int degreeSum = 2 * 360; //first two turns
+
+            int start = lineValues[0];
+            int first = lineValues[1];
+            int second = lineValues[2];
+            int third = lineValues[3];
+
+            degreeSum += getDegreeBetweenNumbers(start, first, false);
+            degreeSum += 360; // second full turn
+            degreeSum += getDegreeBetweenNumbers(first, second, true);
+            degreeSum += getDegreeBetweenNumbers(second, third, false);
+            lines1 += degreeSum + "\n";
+
+            lineValues = inUtils.getNextNDigitFromLine(4);
+        }
 
         if (runningLocally)
         {
@@ -28,13 +49,47 @@ public class Main
 
 //        outUtils.printLine(lines1 + "\n --------- ");
 //        outUtils.printLine(lines + "\n --------- ");
-            outUtils.printLine(lines.equals(resLines) + "");
+            outUtils.printLine(lines.equals(lines1) + "");
         } else
         {
-            System.out.print(resLines);
+            System.out.print(lines1);
         }
     }
-    
+
+    private int getDegreeBetweenNumbers(int first, int second, boolean clockwise)
+    {
+        int degree = 0;
+        if (clockwise)
+        {
+            if (second < first)
+            {
+                second += NUMBERS_COUNTS;
+            }
+            degree = second - first;
+        } else
+        {
+            if (second > first)
+            {
+                first += NUMBERS_COUNTS;
+            }
+            degree = first - second;
+        }
+        degree *= UNIT_DEGREE;
+        return degree;
+    }
+
+    private boolean lastLine(int[] lineValues)
+    {
+        for (int value : lineValues)
+        {
+            if (value != 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private Main(String inputFile)
     {
         inUtils = new Utils(inputFile);

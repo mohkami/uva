@@ -7,15 +7,35 @@ import java.util.*;
  */
 public class Main
 {
-    private Utils utils;
+    private Utils inUtils;
 
-    private void run()
+    private void run(boolean runningLocally)
     {
+
+        String resLines = "";
+
+        if (runningLocally)
+        {
+            Utils outUtils = new Utils("expected_output.txt");
+            String line;
+            String lines = "";
+            while ((line = outUtils.readLine()) != null)
+            {
+                lines += line + "\n";
+            }
+
+//        outUtils.printLine(lines1 + "\n --------- ");
+//        outUtils.printLine(lines + "\n --------- ");
+            outUtils.printLine(lines.equals(resLines) + "");
+        } else
+        {
+            System.out.print(resLines);
+        }
     }
 
     private Main(String inputFile)
     {
-        utils = new Utils(inputFile);
+        inUtils = new Utils(inputFile);
     }
 
     public static void main(String[] arg)
@@ -26,7 +46,7 @@ public class Main
             inputFile = arg[0];
         }
         Main m = new Main(inputFile);
-        m.run();
+        m.run(arg.length > 0);
     }
 
     private class Utils
@@ -58,14 +78,21 @@ public class Main
             return System.getProperty("user.dir") + "\\src\\";
         }
 
-        int readOneIntLine(){
-            return getNDigitFromLine(1)[0];
+        int readOneIntLine()
+        {
+            return getNextNDigitFromLine(1)[0];
         }
 
-        int[] getNDigitFromLine(int n)
+        int[] getNextNDigitFromLine(int n)
         {
+            return getNDigitFromLine(inUtils.readLine(), n);
+        }
+
+        int[] getNDigitFromLine(String line, int n)
+        {
+            String[] words = line.split("\\s+");
             int[] values = new int[n];
-            String[] words = utils.readLine().split("\\s+");
+
             for (int i = 0; i < n; i++)
             {
                 values[i] = Integer.valueOf(words[i]);
