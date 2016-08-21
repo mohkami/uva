@@ -1,4 +1,4 @@
-package template;
+package p494;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,17 +29,28 @@ public class Main
 
     private void run()
     {
+        String line;
+        while ((line = utils.readLine()) != null)
+        {
+            String[] words = line.split("([^a-zA-Z])+");
+            int wordsCount = words.length;
+            for (String word : words)
+            {
+                wordsCount -= word.equals("") ? 1 : 0;
+            }
+            System.out.println(wordsCount);
+        }
     }
 
     private class Utils
     {
         Scanner scanner;
 
-        Utils(String inputFIle)
+        Utils(String inputFile)
         {
-            if (!inputFIle.isEmpty())
+            if (!inputFile.isEmpty())
             {
-                File file = new File(getCurrentDirectory() + inputFIle);
+                File file = new File(getCurrentDirectory() + inputFile);
 
                 try
                 {
@@ -68,6 +79,16 @@ public class Main
                 values[i] = scanner.nextInt();
             }
             return values;
+        }
+
+        String readLine()
+        {
+            String line = null;
+            if (scanner.hasNext())
+            {
+                line = scanner.nextLine();
+            }
+            return line;
         }
     }
 }

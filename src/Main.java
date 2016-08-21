@@ -15,7 +15,7 @@ public class Main
         utils = new Utils(inputFile);
     }
 
-    public static void main(String[] arg) throws IOException
+    public static void main(String[] arg)
     {
         String inputFile = "";
         if (arg.length > 0)
@@ -26,7 +26,7 @@ public class Main
         m.run();
     }
 
-    private void run() throws IOException
+    private void run()
     {
     }
 
