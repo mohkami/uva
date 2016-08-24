@@ -1,6 +1,8 @@
+package p11547;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * Created by Mason on 2016-08-16.
@@ -17,6 +19,9 @@ public class Main
 
         for (int i = 0; i < testCases; i++)
         {
+            int value = inUtils.readOneIntLine();
+            long tensValue = getCalculatedTensValue(value);
+            resLines += tensValue + "\n";
         }
 
         if (runningLocally)
@@ -36,6 +41,13 @@ public class Main
         {
             System.out.print(resLines);
         }
+    }
+
+    private int getCalculatedTensValue(int value)
+    {
+        int calculatedValue = (value * 63 + 7492) * 5 - 498;
+        calculatedValue = Math.abs(calculatedValue);
+        return (calculatedValue % 100) / 10;
     }
 
     private Main(String inputFile)
