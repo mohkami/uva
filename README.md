@@ -9,4 +9,4 @@ This repository includes codes related to UVA Online Judge (https://uva.onlineju
     int firstLineNumber = = scanner.nextInt();
     ```
  2. Make sure that the name of the class you are submitting is "Main"
- 3. Make sure the class is not inside another package that is you should no have something like "package p10300;" in the first line of your code.
+ 3. Make sure the class is not inside another package that is you should not have something like "package p10300;" in the first line of your code.
